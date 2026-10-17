@@ -2,7 +2,7 @@
 
 ## Table of Contents 
 1. [Pantograph](#pantograph)
-2. [Pant0graph] (#pant0graph)
+2. [Pant0graph](#pant0graph)
 
 ## Pantograph
 

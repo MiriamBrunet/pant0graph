@@ -2,6 +2,7 @@
 
 ## Table of Contents 
 1. [Pantograph](#pantograph)
+2. [Pant0graph] (#pant0graph)
 
 ## Pantograph
 
@@ -16,79 +17,6 @@ POPL 2025 paper: [Pantograph: A Fluid and Typed Structure Editor](https://arxiv.
 
 [Try Pantograph online](https://pantographeditor.github.io/Pantograph/).
 
-Table of Contents
-- [Pantograph](#pantograph)
-  - [What is Pantograph](#what-is-pantograph)
-    - [Well-grammared programming (zipper editing)](#well-grammared-programming-zipper-editing)
-    - [Well-typed programming](#well-typed-programming)
-  - [Development](#development)
-  - [Design](#design)
-  - [Organization](#organization)
-  - [Citation](#citation)
-
-
-### What is Pantograph
-
-#### Well-grammared programming (zipper editing)
-
-Unlike a traditional code editor in which text is parsed and then typechecked, Pantograph operates directly on a typed syntax tree.
-Users may fill in typed holes to input programs, here by inserting a list `l2`:
-
-![image](https://github.com/user-attachments/assets/581c07c3-50e4-4af5-80a7-ea19f060c9ba)
-
-Many existing structure editors allow the user to fill holes, and manipulate entire terms.
-But how can one edit existing programs? In particular, suppose that the programmer realizes that l2 never contains negative numbers, and decides to
-optimize the expression by moving the execution of the append operation to after the filter.
-
-To make this edit by only manipulating entire terms would be difficult. One could imagine various user interfaces, but generally the manipulation would look like this:
-
-![image](https://github.com/user-attachments/assets/86cc1dc9-1650-4389-b113-7d723fc3a006)
-
-Pantograph makes edits to existing program easier by introducing a notion of a *tree selection*. If a text selection goes between two text cursors, and a tree cursor goes on a subtree,
-then a tree selection goes between two subtrees. It is the area inside one subtree and outside another, also known as a one-hole context.
-Using this notion, the programmer can make the above edit easily:
-
-![image](https://github.com/user-attachments/assets/ff2d9a5c-9f00-46d2-ab71-1ba6659c3612)
-
-Even better, it turns out that nearly all common program edits on functional code have this form:
-
-![image](https://github.com/user-attachments/assets/252ffa54-8ac4-40d2-905b-9e4cc65a06f4)
-
-We call this editing scheme with tree cursors and selection *zipper editing*.
-
-#### Well-typed programming
-
-Zipper editing, like the traditional structure editing it extends, preserves the syntactic well-formedness of programs. However, it does not necessarily preserve well-typedness.
-
-Any system that aims to operate on intrinsically typed terms needs to account for how such an edit changes types in the program. In Pantograph, every edit is a typed refactoring operation.
-
-When the user inserts a `λ` expression around the body of map, Pantograph automatically makes the edits necessary to keep the program well typed. The system adds an application to a hole at the two call sites, and alters the type signature.
-
-![image](assets/map-1.png)
-
-Pantograph fully takes into account the intrinsically-typed structure of the program, so it can handle more deeply-nested edits, for example, adding a higher-order argument.
-
-![image](assets/map-2.png)
-
-Of course, it is not always desirable for an editor to fix typing issues automatically. Sometimes, Pantograph leaves errors in the program for the user to fix later. For example, suppose that the user deletes the f parameter from a finished map function.
-
-When the user makes the deletion, it leaves a couple of errors in the program. There is an unbound call to `f`, and an out of place argument at the two call sites to map. While the system could simply replace the former with a hole and remove the latter two from the program, this would likely erase valuable work that the programmer wanted to keep.
-
-To allow such errors to exist in an otherwise well typed program, Pantograph has three final constructions:
-- **free variables** e.g. in the first code example below, the references to `f` after `λ f` is deleted
-- **commented applications** e.g. in the first code example below, the argument `not` which is given to `map` even though `map` only takes 1 argument after `λ f` is deleted
-- **type error boundaries** e.g. in the second code example below, `(f h)` and `not` no longer have the correct type and Pantograph did not have a canonical way to fix it
-
-![image](assets/map-3.png)
-
-![image](assets/map-4.png)
-
-To some extent, type error boundaries are similar to the type errors placed by familiar type checker. But they are actually first-class terms in the program. Below, the user deletes the type error boundary
-with a selection, which tell's Pantograph to update the surrounding program to fit the type inside the error boundary.
-
-![image](assets/map-5.png)
-
-In the paper, we describe the math behind this typed refactoring system.
 
 ### Development
 
@@ -132,16 +60,14 @@ The implementation in `src/` is organized as follows:
 - `Language.Pantograph.Lib.*` modules contain useful functionalities for defining specific editor instances (for example, language-generically deriving the propagation rules as mentioned in the paper)
 - `Tutorial.*` contains all the functionalities specific to the Pantograph tutorial (e.g. defining the tutorial UI and lessons)
 
-### Citation
 
-To cite the Pantograph paper associated with this repository:
-
-```bibtex
-@article{pantograph,
-  author = {Prinz J, Blanchette H, Lampropoulos L},
-  title = {Pantograph: Pantograph: A Fluid and Typed Structure Editor},
   journal = {POPL},
   year = {2025},
   doi = {10.1145/3704864}
 }
-```
+
+## Pant0graph
+Pant0graph is a version of Pantograph that allows error insertion rather than just preserving text as an error. This is to remedy the issue discussed in the 
+paper where Pantograph will force the user to edit in a certain order, always defining the variable before use and disallowing insertion of incorrect types. My 
+changes involve allowing these errors to be inserted as errors and provided the user with a quick way to resolve them.
+

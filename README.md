@@ -8,7 +8,7 @@
 
 ![pantograph-example-1](assets/pantograph-example-1.gif)
 
-This is the source code for Pantograph, a structure editor.
+[This](https://github.com/jeprinz/pantograph) is the source code for Pantograph, a structure editor.
 It was written by [Jacob Prinz](https://jeprinz.github.io/) and [Henry Blanchette](https://rybl.net).
 
 POPL 2025 paper: [Pantograph: A Fluid and Typed Structure Editor](https://arxiv.org/pdf/2411.16571).

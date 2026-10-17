@@ -1,0 +1,46 @@
+{
+  "name": "pantograph",
+  "version": "1.0.0",
+  "description": "A fluid intrinsically-typed structure editor",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.17.18",
+    "purescript": "^0.15.8",
+    "purs-backend-es": "^1.3.2",
+    "spago": "^0.20.9"
+  },
+  "scripts": {
+    "postinstall": "spago install",
+    "clean": "rm -rf node_modules output .spago *.lock .cache",
+    "clean-purscript": "rm -rf output .spago .psc-ide-port .psci_modules",
+    "test": "npx spago test",
+    "build-old": "npx spago build --purs-args \"--codegen=sourcemaps,js\"",
+    "build-prod": "spago -x spago.production.dhall build --purs-args \"-o output-prod -g sourcemaps --json-errors\"",
+    "bundle": "npm run build-prod && purs-backend-es bundle-app --main Main --minify --no-build --to dist/pantograph.js",
+    "build-tutorial": "spago build && npx esbuild tutorial.js --bundle --outfile=dist/pantograph.js",
+    "build-standalone": "spago build && npx esbuild standalone.js --bundle --outfile=dist/standalone/pantograph.js",
+    "build": "npm run build-tutorial && npm run build-standalone",
+    "serve": "npm run build && npx esbuild standalone.js --bundle --outfile=dist/standalone/pantograph.js --servedir=dist/standalone",
+    "docs": "npm run build && rm -rf docs && cp -r dist docs",
+    "publish": "npm run docs && git add . && git commit -m\"publish\" && git push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeprinz/pantograph.git"
+  },
+  "keywords": [
+    "programm-language",
+    "type-theory"
+  ],
+  "author": "Jacob Prinz, Henry Blanchette",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeprinz/pantograph/issues"
+  },
+  "homepage": "https://github.com/jeprinz/pantograph#readme"
+}

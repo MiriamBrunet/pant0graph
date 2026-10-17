@@ -71,3 +71,9 @@ Pant0graph is a version of Pantograph that allows error insertion rather than ju
 paper where Pantograph will force the user to edit in a certain order, always defining the variable before use and disallowing insertion of incorrect types. My 
 changes involve allowing these errors to be inserted as errors and provided the user with a quick way to resolve them.
 
+### Additions
+- Created CurrString, adding string support and several built in string functions to Currying.
+- Allowed insertion of undeclared variables. They occur at the bottom of the buffer's suggested entries in red, separating `extraQueryEdits` into literals and errors.
+- Added Backpack, which contains declarations for any free variables (above listed undeclared variables)
+- Created shortened tutorial with Backpack and exercises to test if it provides increased usability.
+

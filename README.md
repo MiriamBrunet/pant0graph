@@ -69,7 +69,7 @@ The implementation in `src/` is organized as follows:
 ## Pant0graph
 Pant0graph is a version of Pantograph that allows error insertion rather than just preserving text as an error. This is to remedy the issue discussed in the 
 paper where Pantograph will force the user to edit in a certain order, always defining the variable before use and disallowing insertion of incorrect types. My 
-changes involve allowing these errors to be inserted as errors and provided the user with a quick way to resolve them.
+changes involve allowing these errors to be inserted as errors and provided the user with a quick way to resolve them. My name for the modified version is a play on words of the original version and the concepts I have added, since in a program where `pantograph` is defined, `pant0graph` would be a hard-to-catch undefined variable.
 
 ### Additions
 - Created the `CurrString` module, adding string support and several built in string functions to Currying.

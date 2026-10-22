@@ -12401,7 +12401,6 @@
   var b = /* @__PURE__ */ element2("b");
   var b_ = /* @__PURE__ */ b([]);
   var aside = /* @__PURE__ */ element2("aside");
-  var a = /* @__PURE__ */ element2("a");
 
   // output/Halogen.HTML.Properties/index.js
   var unwrap7 = /* @__PURE__ */ unwrap();
@@ -12424,7 +12423,6 @@
     return prop2(dictIsProp)("type");
   };
   var id3 = /* @__PURE__ */ prop22("id");
-  var href = /* @__PURE__ */ prop22("href");
   var disabled = /* @__PURE__ */ prop1("disabled");
   var classes = /* @__PURE__ */ function() {
     var $32 = prop22("className");
@@ -47782,7 +47780,7 @@
           var editorComponent1 = editorComponent2(unit);
           var render2 = function(state3) {
             var lesson = force(index$prime(lessons2)(state3.activeLesson));
-            return div3([classNames(["vertical-container"])])([div3([classNames(["PantographHeader", "horizontal-container", "padded"]), style("height: 1.4em; justify-content: space-between")])([div3([classNames(["PantographTitle"])])([div_([text("Pantograph")]), div_([a([style("color:lightblue"), href("https://github.com/jeprinz/pantograph/blob/main/README.md")])([text("[About]")])]), div_([text("|")]), div3([style3(discard19(display(flex))(function() {
+            return div3([classNames(["vertical-container"])])([div3([classNames(["PantographHeader", "horizontal-container", "padded"]), style("height: 1.4em; justify-content: space-between")])([div3([classNames(["PantographTitle"])])([div_([text("Editor Tasks")]), div_([text("|")]), div3([style3(discard19(display(flex))(function() {
               return discard19(flexDirection(row))(function() {
                 return rule(new Property2(fromString17("gap"), value14(em(0.5))));
               });
@@ -47926,12 +47924,12 @@
                     return pure38(unit);
                   }
                   ;
-                  throw new Error("Failed pattern match at Tutorial.EditorTask (line 177, column 13 - line 181, column 37): " + [mprog.constructor.name]);
+                  throw new Error("Failed pattern match at Tutorial.EditorTask (line 176, column 13 - line 180, column 37): " + [mprog.constructor.name]);
                 });
               });
             }
             ;
-            throw new Error("Failed pattern match at Tutorial.EditorTask (line 157, column 22 - line 181, column 37): " + [v.constructor.name]);
+            throw new Error("Failed pattern match at Tutorial.EditorTask (line 156, column 22 - line 180, column 37): " + [v.constructor.name]);
           };
           return mkComponent({
             initialState,
